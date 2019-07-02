@@ -16,9 +16,9 @@
 
 
 ### 代码文件说明
-* data.convert 目录下代码是将导出的数据转换为hive 表，在利用上面说的hive脚本添加 唯一id  
+* data.convert 目录下代码是将导出的数据转换为hive 表，再利用上面说的hive脚本添加 唯一id  
 核心为 MergeNodesAndEdges 利用 spark的 cogroup 操作 转换为 janusgraph 接受的导入格式
-此步操作耗时比较久比较占内存，spark 网络超时时间需要 设置长一点
+此步操作耗时比较久，比较占内存，spark.network.timeout=600 设置长一点
 
 * direct 此目录下的代码 为直接连接 janusgraphServer 插入数据。如果数据量比较小的情况下可以使用
 
@@ -51,6 +51,3 @@ KryoSerializer Failed to find one of the right cookies
     <scope>provided</scope>
 </dependency>
 ```
-
-
-     

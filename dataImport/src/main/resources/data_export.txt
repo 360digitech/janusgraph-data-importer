@@ -1,0 +1,33 @@
+# AgensGraph data export
+# 顶点
+COPY (
+match (m:mobile) return m
+) TO '/tmp/mobile.csv';
+
+
+COPY (
+match (m:device) return m
+) TO '/tmp/device.csv';
+
+
+COPY (
+match (m:wifi) return m
+) TO '/tmp/wifi.csv';
+
+
+COPY (
+match (m1:MOBILE)-[r:CALL]->(m2:MOBILE) return m1.name, 'CALL', m2.name, r.mgm
+) TO '/tmp/call.csv'  DELIMITER ',';
+
+
+COPY (
+match (m1:MOBILE)-[r:USE]->(m2:DEVICE) return m1.name, 'USE', m2.name
+) TO '/tmp/use.csv'  DELIMITER ',';
+
+COPY (
+match (m1:DEVICE)-[r:HAS]->(m2:MOBILE) return m1.name, 'HAS', m2.name
+) TO '/tmp/has.csv'  DELIMITER ',';
+
+COPY (
+match (m1:MOBILE)-[r:USE_WIFI]->(m2:WIFI) return m1.name, 'USE_WIFI', m2.name
+) TO '/tmp/use_wifi.csv'  DELIMITER ',';

@@ -3,7 +3,7 @@ package com.qihoo.finance.tap.data.convert
 import com.qihoo.finance.tap.ImportCommon
 import org.apache.log4j.{LogManager, Logger}
 import org.apache.spark.sql.types._
-import org.apache.spark.sql.{Row, SQLContext}
+import org.apache.spark.sql.{DataFrame, Row, SQLContext}
 import org.apache.spark.{SparkConf, SparkContext}
 
 object MergeNodesAndEdges {
@@ -37,17 +37,17 @@ object MergeNodesAndEdges {
     val sqlContext = new SQLContext(sc)
     val outputFile = options.getOrElse('outputFile, "").asInstanceOf[String]
 
-    //    val (mobile_df: DataFrame, device_df: DataFrame, wifi_df: DataFrame, call_df: DataFrame, has_df: DataFrame, use_df: DataFrame, use_wifi_df: DataFrame) =
-    //      generateTestDataDF(sc, sqlContext)
+    val (mobile_df: DataFrame, device_df: DataFrame, wifi_df: DataFrame, call_df: DataFrame, has_df: DataFrame, use_df: DataFrame, use_wifi_df: DataFrame) =
+      generateTestDataDF(sc, sqlContext)
 
-    val mobile_df = sqlContext.sql("select * from migrate_mobile_id_tmp")
-    val device_df = sqlContext.sql("select * from migrate_device_id_tmp")
-    val wifi_df = sqlContext.sql("select * from migrate_wifi_id_tmp")
-
-    val call_df = sqlContext.sql("select * from migrate_call_id_tmp")
-    val has_df = sqlContext.sql("select * from migrate_has_id_tmp")
-    val use_df = sqlContext.sql("select * from migrate_use_id_tmp")
-    val use_wifi_df = sqlContext.sql("select * from migrate_use_wifi_id_tmp")
+//    val mobile_df = sqlContext.sql("select * from migrate_mobile_id_tmp")
+//    val device_df = sqlContext.sql("select * from migrate_device_id_tmp")
+//    val wifi_df = sqlContext.sql("select * from migrate_wifi_id_tmp")
+//
+//    val call_df = sqlContext.sql("select * from migrate_call_id_tmp")
+//    val has_df = sqlContext.sql("select * from migrate_has_id_tmp")
+//    val use_df = sqlContext.sql("select * from migrate_use_id_tmp")
+//    val use_wifi_df = sqlContext.sql("select * from migrate_use_wifi_id_tmp")
 
 
     val mobile_kv = mobile_df.rdd.keyBy(_ (0)).mapValues(fields => {

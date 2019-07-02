@@ -38,4 +38,19 @@ KryoSerializer Failed to find one of the right cookies
 
 * 确保建议唯一索引的数据是唯一的，id是唯一的，不然数据导入会有问题
 
+
+## 补充
+* pom 文件中的   <scope>provided</scope> 表示在打包的时候不会打入进去
+集群环境中是已经有这些包的，在本地调试的时候需要将这行注释掉
+本地调试时 代码中的这行也需要放开 //    conf.setMaster("local")
+```
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-hive_${scala.version}</artifactId>
+    <version>${spark.version}</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+
      

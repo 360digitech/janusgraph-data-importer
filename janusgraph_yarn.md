@@ -20,8 +20,9 @@ rm -f spark-2.2.1-bin-hadoop2.7/jars/guava-*.jar
 cp janusgraph/lib/guava-18.0.jar spark/jars/
 
 ## 修改 bin/gremlin.sh
+```bash
 export CLASSPATH="$CLASSPATH:/etc/hadoop/conf/*:/opt/cloudera/parcels/CDH/lib/hadoop-yarn/*:/home/q/spark/jars/*"
-
+```
 
 ## 文件配置
 gremlin_yan.sh
